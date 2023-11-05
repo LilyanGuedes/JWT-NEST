@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, BeforeInsert, CreateDateColumn, DeleteDateColumn, Generated, PrimaryGeneratedColumn, UpdateDateColumn, Entity } from "typeorm";
+import { hash } from 'bcrypt';
 
+@Entity({name: 'Users'})
 export class UserEntity{
 
   @PrimaryGeneratedColumn('uuid')
@@ -14,15 +16,16 @@ export class UserEntity{
   @Column()
   email: string;
 
-  @Column()
-  password: string;
+  @Column({name: 'password_hash'})
+  passwordHash: string;
 
   @CreateDateColumn({name: 'created_at'})
   createdAt: string;
 
-  @UpdateDateColumn({name: 'created_at'})
-  updateAt: string
+  @UpdateDateColumn({name: 'updated_at'})
+  updateAt: string;
 
   @DeleteDateColumn({name: 'deledet_at'})
-  deleteAdt: string
+  deleteAdt: string;
+
 }
