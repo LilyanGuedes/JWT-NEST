@@ -8,6 +8,7 @@ import { hash } from 'bcrypt';
 
 @Injectable()
 export class UsersService {
+  
   constructor(
     @InjectRepository(UserEntity)
     private readonly usersRepository: Repository<UserEntity>
@@ -38,8 +39,8 @@ export class UsersService {
     const user = await this.findOneOrFail({where: { id } });
     this.usersRepository.merge(user, data);
     return await this.usersRepository.save(user)
-
   }
+
   async destroy(id: string) {
     await this.usersRepository.findOneOrFail({where: { id }})
     this.usersRepository.softDelete({ id })
